@@ -146,30 +146,30 @@ $ ps | grep ps\
 ^process ID
 
 We can terminate a process by name or by PID\
-$ kill 2506 OR $ kill ps – will kill process\
-$ killall ssh – kill all ssh connections to other machines
+$ kill 2506 OR $ kill ps b  will kill process\
+$ killall ssh b  kill all ssh connections to other machines
 
-/bin/bash – bash shell is a file on your computer that gets run\
-$ rm /bin/bash – malicious user tries to delete ways for user to get a shell on their computer\
+/bin/bash b  bash shell is a file on your computer that gets run\
+$ rm /bin/bash b  malicious user tries to delete ways for user to get a shell on their computer\
 If you delete bash, computer may be nonfunctional\
 The whole OS --> series of files\
 $ rm -rf /\
 ^2nd r is for recursive through all folders, f is for forcible removal
 
-Authorization – every file and folder has a permission linked to it\
+Authorization b  every file and folder has a permission linked to it\
 3 categories\
--User/owner – owner (username) of the file (usually who created it)\
--Group – collection of users\
--World – any other user who has access – typically means shell access\
+-User/owner b  owner (username) of the file (usually who created it)\
+-Group b  collection of users\
+-World b  any other user who has access b  typically means shell access\
 For each category, 3 independent permissions\
--r – read – contents of a file (can read w/ cat, launch w/ nano but no edits)\
--w – write – edit a file\
--x – execute\
+-r b  read b  contents of a file (can read w/ cat, launch w/ nano but no edits)\
+-w b  write b  edit a file\
+-x b  execute\
 Shown in a 10-character register ($ls -la gives you this)\
 -d r w x r - x - - - pi pi somefiletxt\
  ^owner ^group\
 -First character: file type\
-      – file\
+      b  file\
       d directory/folder\
       l link\
 -Next 3 sets of 3 characters each\
@@ -178,17 +178,17 @@ Shown in a 10-character register ($ls -la gives you this)\
      3rd set: world
 
 How to edit permissions? (ch = change)\
-chown – change ownership\
-chgrp – change group associated\
-chmod – change mode of the permissions\
+chown b  change ownership\
+chgrp b  change group associated\
+chmod b  change mode of the permissions\
 $ chown student filename (student username becomes owner\
 $ chmod +x filename (add execute permissions to the file)\
                  ^adds for every category\
 
 Who can change permissions?\
--Whoever has read and write access – typically at least the owner\
--Superuser <-> root – one master/base user account from which all other accounts are derived\
--Typically – if you have admin access, then you can become root
+-Whoever has read and write access b  typically at least the owner\
+-Superuser <-> root b  one master/base user account from which all other accounts are derived\
+-Typically b  if you have admin access, then you can become root
 By default: pi username is an admin\
 
 $ whoami\
@@ -201,35 +201,41 @@ $ sudo apt-get dist-upgrade\
 $ sudo -s\
 #_ (general user gets $, root user gets #. Warning that you have infinite power over the system)\
 $ rm /bin/bash\
-^won’t run because bash file is owned by root --> fail\
+^wonb t run because bash file is owned by root --> fail\
 $ sudo rm /bin/bash\
 ^will delete bash command\
 $ rm -rf /\
 ^remove ^recursively force delete ^top level of harddrive\
-If you run this while logged in as pi --> won’t happen\
+If you run this while logged in as pi --> wonb t happen\
 BUT\
 $ sudo rm -rf /                 will delete entire harddrive
 
 # grep
 grep "boo" a_file\
--n: adds line numbers\
--vn: prints negative result, lines that do not match search string\
--c: suppresses printing of matching lines, only display number of lines that match the query\
--l: only prints filenames of files in query that have lines that match the search string, useful if you're searching through multiple files for the same string\
--i: treats upper and lower cases as equivalent while matching the search string\
--x: looks for exact matches only\
--A: allows you to specify additional lines of context file (grep -A2 "mach" a_file --> machine, boots, bungie)\
--e$: prints lines that end in the letter 'e'\
--grep "boots?" a_file --> boot, boots\
--grep -E "boot|boots" a_file --> boot, boots\
--special characters: grep '\$' a_file --> broken$tuff\
--F: finds literal string and not regexps
+-n: adds line numbers\  
+-vn: prints negative result, lines that do not match search string\  
+-c: suppresses printing of matching lines, only display number of lines that match the query\  
+-l: only prints filenames of files in query that have lines that match the search string, useful if you're searching through multiple files for the same string\  
+-i: treats upper and lower cases as equivalent while matching the search string\  
+-x: looks for exact matches only\  
+-A: allows you to specify additional lines of context file (grep -A2 "mach" a_file --> machine, boots, bungie)\  
+-e$: prints lines that end in the letter 'e'\  
+-grep "boots?" a_file --> boot, boots\  
+-grep -E "boot|boots" a_file --> boot, boots\  
+-special characters: grep '\$' a_file --> broken$tuff\  
+-F: finds literal string and not regexps  
 
 # awk
-an awk program operates on each line of an input file\
-BEGIN {initialization awk commands}\
-{awk commands for each line of the file}\
-END {finalization awk commands}
+an awk program operates on each line of an input file\  
+BEGIN {initialization awk commands}\  
+{awk commands for each line of the file}\  
+END {finalization awk commands}  
+
+**Awk examples**  
+`$ls -l | awk 'BEGIN {sum-0} {sum=sum+5} END {print sum}'`
+Looks at the 5th coulum of data in ls-la and sums it  
+
+`ls -la | awk '{for (i=1;i<3;i++) {getline}; print NR, $0}'` prints out every third line of ls -la
 
 **awk control statements:**\
 if (condition) statement [else statement]\
